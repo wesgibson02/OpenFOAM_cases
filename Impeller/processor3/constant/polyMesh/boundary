@@ -1,0 +1,147 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+13
+(
+    stationaryWalls
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          0;
+        startFace       6492;
+    }
+    inlet
+    {
+        type            patch;
+        nFaces          0;
+        startFace       6492;
+    }
+    outlet
+    {
+        type            patch;
+        nFaces          0;
+        startFace       6492;
+    }
+    cyclicIn1
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          0;
+        startFace       6492;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicIn2;
+    }
+    cyclicIn2
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          0;
+        startFace       6492;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicIn1;
+    }
+    cyclicRepeatAMIIn1
+    {
+        type            cyclicRepeatAMI;
+        inGroups        List<word> 1(cyclicRepeatAMI);
+        nFaces          0;
+        startFace       6492;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicRepeatAMIIn2;
+        method          faceAreaWeightAMI;
+        transformPatch  cyclicIn1;
+    }
+    cyclicRepeatAMIIn2
+    {
+        type            cyclicRepeatAMI;
+        inGroups        List<word> 1(cyclicRepeatAMI);
+        nFaces          0;
+        startFace       6492;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicRepeatAMIIn1;
+        method          faceAreaWeightAMI;
+        transformPatch  cyclicIn1;
+    }
+    cyclicOut1
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          0;
+        startFace       6492;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicOut2;
+    }
+    cyclicOut2
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          0;
+        startFace       6492;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicOut1;
+    }
+    cyclicRepeatAMIOut1
+    {
+        type            cyclicRepeatAMI;
+        inGroups        List<word> 1(cyclicRepeatAMI);
+        nFaces          187;
+        startFace       6492;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicRepeatAMIOut2;
+        method          faceAreaWeightAMI;
+        transformPatch  cyclicIn1;
+    }
+    cyclicRepeatAMIOut2
+    {
+        type            cyclicRepeatAMI;
+        inGroups        List<word> 1(cyclicRepeatAMI);
+        nFaces          0;
+        startFace       6679;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicRepeatAMIOut1;
+        method          faceAreaWeightAMI;
+        transformPatch  cyclicIn1;
+    }
+    movingWalls
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          684;
+        startFace       6679;
+    }
+    procBoundary3to2
+    {
+        type            processor;
+        inGroups        List<word> 1(processor);
+        nFaces          221;
+        startFace       7363;
+        matchTolerance  0.0001;
+        transform       unknown;
+        myProcNo        3;
+        neighbProcNo    2;
+    }
+)
+
+// ************************************************************************* //

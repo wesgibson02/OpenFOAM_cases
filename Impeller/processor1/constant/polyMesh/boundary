@@ -1,0 +1,158 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+14
+(
+    stationaryWalls
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          320;
+        startFace       6359;
+    }
+    inlet
+    {
+        type            patch;
+        nFaces          160;
+        startFace       6679;
+    }
+    outlet
+    {
+        type            patch;
+        nFaces          0;
+        startFace       6839;
+    }
+    cyclicIn1
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          100;
+        startFace       6839;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicIn2;
+    }
+    cyclicIn2
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          100;
+        startFace       6939;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicIn1;
+    }
+    cyclicRepeatAMIIn1
+    {
+        type            cyclicRepeatAMI;
+        inGroups        List<word> 1(cyclicRepeatAMI);
+        nFaces          160;
+        startFace       7039;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicRepeatAMIIn2;
+        method          faceAreaWeightAMI;
+        transformPatch  cyclicIn1;
+    }
+    cyclicRepeatAMIIn2
+    {
+        type            cyclicRepeatAMI;
+        inGroups        List<word> 1(cyclicRepeatAMI);
+        nFaces          93;
+        startFace       7199;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicRepeatAMIIn1;
+        method          faceAreaWeightAMI;
+        transformPatch  cyclicIn1;
+    }
+    cyclicOut1
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          0;
+        startFace       7292;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicOut2;
+    }
+    cyclicOut2
+    {
+        type            cyclic;
+        inGroups        List<word> 1(cyclic);
+        nFaces          0;
+        startFace       7292;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicOut1;
+    }
+    cyclicRepeatAMIOut1
+    {
+        type            cyclicRepeatAMI;
+        inGroups        List<word> 1(cyclicRepeatAMI);
+        nFaces          0;
+        startFace       7292;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicRepeatAMIOut2;
+        method          faceAreaWeightAMI;
+        transformPatch  cyclicIn1;
+    }
+    cyclicRepeatAMIOut2
+    {
+        type            cyclicRepeatAMI;
+        inGroups        List<word> 1(cyclicRepeatAMI);
+        nFaces          0;
+        startFace       7292;
+        matchTolerance  0.0001;
+        transform       unknown;
+        neighbourPatch  cyclicRepeatAMIOut1;
+        method          faceAreaWeightAMI;
+        transformPatch  cyclicIn1;
+    }
+    movingWalls
+    {
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          224;
+        startFace       7292;
+    }
+    procBoundary1to0
+    {
+        type            processor;
+        inGroups        List<word> 1(processor);
+        nFaces          96;
+        startFace       7516;
+        matchTolerance  0.0001;
+        transform       unknown;
+        myProcNo        1;
+        neighbProcNo    0;
+    }
+    procBoundary1to2
+    {
+        type            processor;
+        inGroups        List<word> 1(processor);
+        nFaces          93;
+        startFace       7612;
+        matchTolerance  0.0001;
+        transform       unknown;
+        myProcNo        1;
+        neighbProcNo    2;
+    }
+)
+
+// ************************************************************************* //
